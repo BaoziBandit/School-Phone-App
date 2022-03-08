@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WGU_Xamarin.TermPage">
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical" Margin="20,0">
+            <Label Text="WGU"
+                   TextColor="DarkCyan"
+                   FontSize="Header"
+                   HorizontalOptions="Center"
+                   Margin="0,20"/>
+            
+            <Label x:Name="termLabel" 
+                   HorizontalOptions="Center"
+                   FontSize="Large"  
+                   Text="Term Name" 
+                   TextColor="Black">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnTermLabelTapped"/>
+                </Label.GestureRecognizers>
+            </Label>
+            <Entry x:Name="termEntry"
+                   BindingContext="{x:Reference termLabel}"
+                   Text="{Binding Text, Mode=TwoWay}"
+                   IsVisible="false"
+                   Focused="termEntry_Focused"
+                   Unfocused="OnTermEntryUnfocused"
+                   HorizontalOptions="Center"
+                   HorizontalTextAlignment="Center"
+                   FontSize="Large"
+                   WidthRequest="200"/>
+
+            <StackLayout Margin="50, 100, 20, 0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackLayout Grid.Column="0">
+                        <Label Text="Start Date:" TextColor="Black"/>
+                        <DatePicker x:Name="startDate" Date="1/10/2022" Format="d" TextColor="blue" DateSelected="startDate_DateSelected"/>
+                    </StackLayout>
+                    <StackLayout Grid.Column="1">
+                        <Label Text="Notify" HorizontalOptions="Center"/>
+                        <CheckBox x:Name="startNotify" HorizontalOptions="Center" Color="DarkCyan"/>
+                    </StackLayout>
+                </Grid>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackLayout Grid.Column="0">
+                        <Label Text="End Date:" TextColor="Black"/>
+                        <DatePicker x:Name="endDate" Date="1/10/2022" Format="d" TextColor="blue" DateSelected="endDate_DateSelected"/>
+                    </StackLayout>
+                    <StackLayout Grid.Column="1">
+                        <Label Text="Notify" HorizontalOptions="Center"/>
+                        <CheckBox x:Name="endNotify" HorizontalOptions="Center" Color="DarkCyan"/>
+                </StackLayout>
+                </Grid>
+            </StackLayout>
+
+            <StackLayout Orientation="Vertical">
+                <ListView x:Name="CourseList" ItemTapped="CourseList_ItemTapped" SelectionMode="None" HorizontalOptions="Center">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell IsEnabled="True">
+                                <StackLayout Orientation="Vertical" HorizontalOptions="Center">
+                                    <StackLayout Orientation="Horizontal" VerticalOptions="Center" Margin="20">
+                                        <!--<Label Text="{Binding termId}"/>-->
+                                        <Label VerticalOptions="Center" 
+                                           FontSize="Large"
+                                           TextColor="DarkBlue"
+                                           Text="{Binding Name}"/>
+
+                                    </StackLayout>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Text="Add Course" Clicked="OnAddCourseBtnClicked"
+                        Grid.Row="0" Grid.Column="1"
+                    HorizontalOptions="Center" WidthRequest="115" HeightRequest="40"
+                    BackgroundColor="LightGray"
+                        Margin="0, 0, 0, 20"/>
+                <Button Text="Save Term" Clicked="OnSaveTermBtnClicked"
+                        Grid.Row="0" Grid.Column="0"
+                    HorizontalOptions="Center" WidthRequest="115" HeightRequest="40"
+                    BackgroundColor="Green" TextColor="White"
+                        Margin="0, 0, 0, 20"/>
+                <Button Text="Delete Term" Clicked="OnDeleteTermBtnClicked"
+                        Grid.Row="0" Grid.Column="2"
+                    HorizontalOptions="Center" WidthRequest="115" HeightRequest="40"
+                    BackgroundColor="Red" TextColor="White"
+                    Margin="0, 0, 0, 20"/>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

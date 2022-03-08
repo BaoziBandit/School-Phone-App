@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WGU_Xamarin.InstructorPage">
+    
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Margin="0,200, 0, 0">
+                <Label x:Name="profName" Text="Name" FontSize="Large" TextColor="DarkCyan" Padding="3" HorizontalOptions="Center">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnNameTapped"/>
+                </Label.GestureRecognizers>
+            </Label>
+            <Entry x:Name="entryName" 
+                   WidthRequest="200" 
+                   IsVisible="false" 
+                   Focused="entryName_Focused"
+                   Unfocused="entryName_Unfocused"
+                   BindingContext="{x:Reference profName}" 
+                   Text="{Binding Text, Mode=TwoWay}"
+                   Placeholder="Name"
+                   VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+
+            <Label x:Name="profPhone" Text="Phone" FontSize="Medium" Padding="3" HorizontalOptions="Center">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnPhoneTapped"/>
+                </Label.GestureRecognizers>
+            </Label>
+            <Entry x:Name="entryPhone" 
+                   WidthRequest="200" 
+                   IsVisible="false" 
+                   Focused="entryPhone_Focused"
+                   Unfocused="entryPhone_Unfocused"
+                   BindingContext="{x:Reference profPhone}" 
+                   Text="{Binding Text, Mode=TwoWay}"
+                   Placeholder="Phone"
+                   VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+
+            <Label x:Name="profEmail" Text="Email" FontSize="Medium" Padding="3" HorizontalOptions="Center">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnEmailTapped"/>
+                </Label.GestureRecognizers>
+            </Label>
+            <Entry x:Name="entryEmail" 
+                   WidthRequest="200" 
+                   IsVisible="false" 
+                   Unfocused="entryEmail_Unfocused" 
+                   Focused="entryEmail_Focused"
+                   BindingContext="{x:Reference profEmail}" 
+                   Text="{Binding Text, Mode=TwoWay}"
+                   Placeholder="Email"
+                   VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+
+                <Button x:Name="saveInstructBtn" Text="Save" 
+                    VerticalOptions="End" HorizontalOptions="Center" WidthRequest="150" HeightRequest="40" Margin="0, 240, 0, 20"
+                    BackgroundColor="Green" TextColor="White" Clicked="saveInstructBtn_Clicked"/>
+            </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

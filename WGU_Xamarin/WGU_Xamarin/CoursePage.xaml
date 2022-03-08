@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WGU_Xamarin.CoursePage">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Orientation="Vertical" Margin="20,0">
+                <Label Text="WGU"
+                   TextColor="DarkCyan"
+                   FontSize="Header"
+                HorizontalOptions="Center" />
+                
+                <Label x:Name="courseLabel" 
+                       FontSize="Large"  
+                       Text="Course Name"
+                       TextColor="Black"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnCourseLabelTapped"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <Entry x:Name="courseEntry"
+                       IsVisible="false"
+                       FontSize="Large"
+                       BindingContext="{x:Reference courseLabel}"
+                       Text="{Binding Text, Mode=TwoWay}"
+                       Focused="courseEntry_Focused"
+                       Unfocused="OnCourseEntryUnfocused"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center"
+                       HorizontalTextAlignment="Center"
+                       WidthRequest="250"/>
+                
+                <Grid Margin="0, 20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Text="Status: " Grid.Row="0" Grid.Column="0" 
+                           VerticalTextAlignment="Center" HorizontalOptions="EndAndExpand" TextColor="Black" FontSize="Medium"/>
+                    <Picker Title="Status"
+                            TitleColor="Blue"
+                            VerticalOptions="Center" HorizontalOptions="StartAndExpand"
+                            Grid.Row="0" Grid.Column="1"
+                            x:Name="statusPicker" 
+                            FontAttributes="Bold"
+                            SelectedIndexChanged="OnPickerIndexChanged" 
+                            WidthRequest="100" />
+                </Grid>
+                
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackLayout Grid.Column="0">
+                        <Label Text="Start Date:" TextColor="Black"/>
+                        <DatePicker x:Name="startPicker" Date="1/10/2022" Format="d" TextColor="blue" DateSelected="startPicker_DateSelected" />
+                    </StackLayout>
+                    <StackLayout Grid.Column="1">
+                        <Label Text="Notify" HorizontalOptions="Center"/>
+                        <CheckBox x:Name="startNotify" HorizontalOptions="Center" Color="DarkCyan"/>
+                    </StackLayout>
+                </Grid>
+
+                <Grid Margin="0, 20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackLayout Grid.Column="0">
+                        <Label Text="End Date:" TextColor="Black"/>
+                        <DatePicker x:Name="endPicker" Date="1/10/2022" Format="d" TextColor="blue" DateSelected="endPicker_DateSelected"/>
+                    </StackLayout>
+                    <StackLayout Grid.Column="1">
+                        <Label Text="Notify" HorizontalOptions="Center"/>
+                        <CheckBox x:Name="endNotify" HorizontalOptions="Center" Color="DarkCyan"/>
+                    </StackLayout>
+                </Grid>
+
+                <Label Text="Description:" 
+                       TextColor="Black"/>
+                <Editor x:Name="description"
+                        AutoSize="TextChanges" Placeholder="Description..."/>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="45"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Text="Notes:"
+                           TextColor="Black"
+                           Grid.Row="0" Grid.Column="0"
+                           HorizontalOptions="StartAndExpand"
+                           VerticalOptions="Center"/>
+                    <Button Text="Share"
+                            Grid.Row="0" Grid.Column="1"
+                            VerticalOptions="Center" HorizontalOptions="StartAndExpand"
+                            WidthRequest="75" HeightRequest="40" Clicked="ShareButton_Clicked"/>
+                </Grid>
+                <Editor x:Name="notes"
+                        AutoSize="TextChanges" Placeholder="Notes..."/>
+
+
+
+            <StackLayout>
+                <Label x:Name="assessLabel" Text="Assessments" TextColor="Black" HorizontalOptions="Center" Margin="5" FontSize="Medium" TextDecorations="Underline"/>
+                <Label x:Name="performance" Text="Performance" TextColor ="Blue" HorizontalOptions="Center" IsVisible="false">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnAssessmentLabelTapped"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label x:Name="objective" Text ="Objective" TextColor ="Blue" HorizontalOptions="Center" IsVisible="false">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnAssessmentLabelTapped"/>
+                    </Label.GestureRecognizers>
+                </Label>
+             </StackLayout>
+                
+                <Button x:Name="addAssBtn" Text="Add Assessments" HorizontalOptions="Center" WidthRequest="175" HeightRequest="40" 
+                        Clicked="addAssBtn_Clicked" BackgroundColor="LightGray" Margin="0, 20"/>
+
+                <Grid Margin="0, 20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <Label Text="Instructor: " TextColor="Black" HorizontalOptions="EndAndExpand"
+                           Margin="10,0" Grid.Row="0" Grid.Column="0"/>
+                    <Label x:Name="instLabel" Text="Lee Denning" TextColor="Blue" HorizontalOptions="StartAndExpand"
+                           Margin="10,0" Grid.Row="0" Grid.Column="1">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnInstructorLabelTapped"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Grid>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <Button Text="Save Course" Clicked="SaveCourse_Clicked"
+                            Grid.Row="0" Grid.Column="0"
+                            HorizontalOptions="Center" VerticalOptions="End" WidthRequest="140" HeightRequest="40"
+                            BackgroundColor="Green" TextColor="White" Margin="0, 0, 0, 20"/>
+                    <Button Text="Delete Course" Clicked="DeleteCourse_Clicked" 
+                            Grid.Row="0" Grid.Column="1"
+                            HorizontalOptions="Center" VerticalOptions="End" WidthRequest="140" HeightRequest="40"
+                            BackgroundColor="Red" TextColor="White" Margin="0, 0, 0, 20"/>
+                </Grid>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
